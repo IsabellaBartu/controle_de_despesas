@@ -1,21 +1,37 @@
-# Importando SQlite
 import sqlite3 as lite
 
-# Criando conexão
 con = lite.connect('dados.db')
 
-# Criando tabelas
-# 1. Categoria
+# Categoria
 with con:
     cur = con.cursor()
-    cur.execute("CREATE TABLE Categoria(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT) ")
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS Categoria(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT
+    )
+    """)
 
-# 2. Receitas 
+# Receitas
 with con:
     cur = con.cursor()
-    cur.execute("CREATE TABLE Receitas(id INTEGER PRIMARY KEY AUTOINCREMENT, categoria TEXT, adicionado_em DATE, valor DECIMAL) ")
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS Receitas(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        categoria TEXT,
+        adicionado_em DATE,
+        valor DECIMAL
+    )
+    """)
 
-# 3. Gastos
+# Gastos
 with con:
     cur = con.cursor()
-    cur.execute("CREATE TABLE Gastos(id INTEGER PRIMARY KEY AUTOINCREMENT, categoria TEXT, retirado_em DATE, valor DECIMAL) ")
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS Gastos(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        categoria TEXT,
+        retirado_em DATE,
+        valor DECIMAL
+    )
+    """)
